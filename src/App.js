@@ -11,7 +11,7 @@ export default class App extends Component {
         <p className="App-intro">
           {JSON.stringify(this.props)}
         </p>
-        <button onClick={() => this.props.addLocation({ name: 'China', region: 'Asia' })} >
+        <button onClick={() => this.props.addTeam({ name: 'China', region: 'Asia' })} >
         Add Stuff
         </button>
         <p className="App-intro">

@@ -25,9 +25,13 @@ const fb = firebase
 // These will update our firebase database
 const addLocation = data => fb.child('locations').push(data, response => response);  
 const updateLocation = (id, data) => fb.child(`locations/${id}`).update(data, response => response);  
+const addTeam = data => fb.child('teams').push(data, response => response);  
+const updateTeam = (id, data) => fb.child(`teams/${id}`).update(data, response => response);  
 const actions = {  
   addLocation,
   updateLocation,
+  addTeam,
+  updateTeam
 };
 
 fb.on('value', snapshot => {  
