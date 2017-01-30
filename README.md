@@ -1,3 +1,12 @@
+## scorer module
+
+This is a learning project while looking at React Router and with a connection to the Firebase database.
+The plan is to create a small responsive app to take in a list of teams, put them into a draw and then to score the matches. Need to make a few pages to show teams, matches and the history of a knockout draw.
+
+
+
+## Default infoo fromm create-react-app ##
+
 This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).
 
 Below you will find some information on how to perform common tasks.<br>
