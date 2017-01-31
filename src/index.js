@@ -39,7 +39,7 @@ fb.on('value', snapshot => {
   ReactDOM.render(
     <Router history={browserHistory}>
       <Route path="/" component={() => (<App {...actions}{...store} />)} />
-      <Route path="/two" component={Two} />
+      <Route path="/two" component={() => (<Two {...store} />)} />
     </Router>,
     document.getElementById('root')
   );

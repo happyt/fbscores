@@ -1,19 +1,18 @@
 ## scorer module
 
-This is a learning project while looking at React Router and with a connection to the Firebase database.
-The plan is to create a small responsive app to take in a list of teams, put them into a draw and then to score the matches. Need to make a few pages to show teams, matches and the history of a knockout draw.
+This is a learning project while looking at React Router and with a connection to a Firebase database.
+The plan is to create a small responsive app to take in a list of teams, put them into a draw and then to score the matches.
+Need to make a few pages to show teams, matches and the history of a knockout draw.
 
 ### Next steps ###
 
-Separate the routes
-Common header
-
-List of locations
-Edit location 
-
-Routes to list locations, edit locations, set up matches, score match 
-Page for joystick
-
+- Separate the routes
+- Common header
+- List of locations
+- Edit location 
+- Routes to list locations, edit locations, set up matches, score match 
+- Page for joystick
+- Use auth
 
 
 ## Default infoo fromm create-react-app ##
