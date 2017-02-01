@@ -5,9 +5,8 @@ import {addTeam, generateId} from './lib/matchHelpers'
 import './App.css';
 
 export default class App extends Component {
-  constructor() {
-    super()
-    this.state = {
+
+      state = {
       teams : [
         { id: 1, name: "Leeds", star: false },
         { id: 2, name: "Liverpool", star: true },
@@ -20,19 +19,15 @@ export default class App extends Component {
       ],
       addition: "abc"
     }
-    this.handleInputChange = this.handleInputChange.bind(this);
-    this.handleTeamSubmit = this.handleTeamSubmit.bind(this);
-    this.handleEmptySubmit = this.handleEmptySubmit.bind(this);
-  }
 
-  handleEmptySubmit(evt) {
+  handleEmptySubmit = (evt) => {
     evt.preventDefault();
     this.setState({
       errorMessage: "Supply a name"
     })
   }
 
-  handleTeamSubmit(evt) {
+  handleTeamSubmit = (evt) => {
     evt.preventDefault();
     const newId = generateId();
     const newTeam = {
@@ -43,11 +38,12 @@ export default class App extends Component {
     const updatedTeams = addTeam(this.state.teams, newTeam);
     this.setState({
       teams: updatedTeams,
-      addition: ""
+      addition: "",
+      errorMessage: ""
     });
   }
 
-  handleInputChange(evt) {
+  handleInputChange = (evt) => {
     this.setState({
       addition: evt.target.value
     })
@@ -68,7 +64,7 @@ export default class App extends Component {
 
           <ListMatches matches={this.state.matches} />
           <ListTeams teams={this.state.teams} />
-
+          {this.state.errorMessage && <span className="error">{this.state.errorMessage}</span>}
           <FormTeam handleInputChange={this.handleInputChange} 
                     addition={this.state.addition}
                     handleSubmit={submitHandler} />
