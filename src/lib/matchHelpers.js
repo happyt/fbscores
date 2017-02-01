@@ -10,6 +10,7 @@ export const toggleStar = (team) => ({...team, star: !team.star})
 
 export const updateTeam = (list, updatedTeam) => {
  //   const updatedIndex = list.findIndex(item => item.id === updatedTeam.id)
+// console.log(list, updatedTeam);
     var updatedIndex;
     var found = list.some(function(item, index) { updatedIndex = index; return item.id === updatedTeam.id; });
 

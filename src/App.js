@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Header from './Header';
 import {FormTeam, ListMatches, ListTeams} from './components/';
-import {addTeam, generateId} from './lib/matchHelpers'
+import {addTeam, generateId, findById, toggleStar, updateTeam} from './lib/matchHelpers'
 import './App.css';
 
 export default class App extends Component {
@@ -18,6 +18,15 @@ export default class App extends Component {
         { id: 3, teamA: "Man City", teamB: "Chelsea", scoreA: 0, scoreB: 0, finished: false },
       ],
       addition: "abc"
+    }
+
+    handleToggleStar = (id) => {
+      const team = findById(id, this.state.teams)
+      const toggled = toggleStar(team);
+      const updatedTeams = updateTeam(this.state.teams, toggled);
+      this.setState( {
+        teams: updatedTeams
+      })
     }
 
   handleEmptySubmit = (evt) => {
@@ -63,7 +72,8 @@ export default class App extends Component {
         <div className="App-intro">Matches
 
           <ListMatches matches={this.state.matches} />
-          <ListTeams teams={this.state.teams} />
+          <ListTeams teams={this.state.teams} 
+                    toggleStar={this.handleToggleStar} />
           {this.state.errorMessage && <span className="error">{this.state.errorMessage}</span>}
           <FormTeam handleInputChange={this.handleInputChange} 
                     addition={this.state.addition}

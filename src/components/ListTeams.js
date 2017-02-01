@@ -5,7 +5,8 @@ export const ListTeams = (props) => {
     return (
         <ul>
             {props.teams.map(mm =>
-                <Team key={mm.id} {...mm} />
+                <Team toggleStar={props.toggleStar}
+                        key={mm.id} {...mm} />
             )}
         </ul>
     )
