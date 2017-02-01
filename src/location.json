@@ -1,0 +1,37 @@
+{
+    "location": {
+        "pathname": "/two",
+        "search": "",
+        "hash": "",
+        "action": "POP",
+        "key": null,
+        "query": {}
+    },
+    "params": {},
+    "route": {
+        "path": "/two"
+    },
+    "router": {
+        "location": {
+            "pathname": "/two",
+            "search": "",
+            "hash": "",
+            "action": "POP",
+            "key": null,
+            "query": {}
+        },
+        "params": {},
+        "routes": [
+            {
+                "path": "/two"
+            }
+        ]
+    },
+    "routeParams": {},
+    "routes": [
+        {
+            "path": "/two"
+        }
+    ],
+    "children": null
+}

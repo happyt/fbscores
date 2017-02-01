@@ -8,8 +8,7 @@ export default class Two extends Component {
       <div className="App">
         <Header />
         <p className="App-intro">
-           {JSON.stringify(this.props.teams
-             )}
+           {JSON.stringify(this.props.teams)}
         </p>
       </div>
     );
