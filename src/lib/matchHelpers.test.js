@@ -1,4 +1,4 @@
-import {addMatch, findById, toggleStar, updateTeam} from './matchHelpers'
+import {addMatch, findById, toggleStar, updateTeam, removeTeam} from './matchHelpers'
 
 test('addMatch should add the passed match to the list', () => {
     const startMatches = [
@@ -85,5 +85,31 @@ test('updateTeam should not mutate the original array', () => {
       ]
     const updatedTeam = {id:1, name:"Arsenal", star:true}
     const result = updateTeam(startTeams, updatedTeam)
+    expect(result).not.toBe(startTeams)
+})
+
+test('removeTeam should remove a team by id', () => {
+    const startTeams = [
+        { id: 1, name: "Leeds", star: false },
+        { id: 2, name: "Liverpool", star: true },
+        { id: 3, name: "Man City", star: false }
+      ]
+    const targetId = 2;
+    const expectedTeams = [
+        { id: 1, name: "Leeds", star: false },
+        { id: 3, name: "Man City", star: false }
+      ]
+    const result = removeTeam(startTeams, targetId)
+    expect(result).toEqual(expectedTeams)
+})
+
+test('removeTeam should not mutate the original array', () => {
+    const startTeams = [
+        { id: 1, name: "Leeds", star: false },
+        { id: 2, name: "Liverpool", star: true },
+        { id: 3, name: "Man City", star: false }
+      ]
+    const targetId = 2;
+    const result = removeTeam(startTeams, targetId)
     expect(result).not.toBe(startTeams)
 })

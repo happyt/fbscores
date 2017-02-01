@@ -23,6 +23,41 @@
   to { transform: rotate(360deg); }
 }
 
+.Todo-App {
+  padding-top:20px;
+  display: inline-block;
+  text-align: left;
+}
+
+input {
+  font-size: 20px
+}
+
+ul {
+  padding: 0px;
+}
+
+li {
+  list-style-type: none;
+}
+
+li span.delete-item {
+  visibility: hidden;
+}
+
+span.delete-item a {
+  text-decoration: none;
+  color:red;
+}
+
+li:hover span.delete-item {
+  visibility: visible;
+}
+
 .error {
-  color: red;
+  color:darkorange;
+}
+
+.footer a {
+  padding: 5px 5px;
 }

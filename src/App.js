@@ -1,8 +1,12 @@
 import React, { Component } from 'react';
 import Header from './Header';
-import {FormTeam, ListMatches, ListTeams} from './components/';
-import {addTeam, generateId, findById, toggleStar, updateTeam} from './lib/matchHelpers'
+import {ListMatches} from './components/matches';
+import {FormTeam, ListTeams} from './components/teams';
+import {Footer} from './Footer';
+import {addTeam, generateId, findById, toggleStar, updateTeam, removeTeam} from './lib/matchHelpers';
+import {pipe, partial} from './lib/utils';
 import './App.css';
+
 
 export default class App extends Component {
 
@@ -20,10 +24,21 @@ export default class App extends Component {
       addition: "abc"
     }
 
+    handleRemoveTeam = (id, evt) => {
+      evt.preventDefault();
+      const updatedTeams = removeTeam(this.state.teams, id)
+      this.setState( {
+        teams: updatedTeams
+      })
+    }
+
     handleToggleStar = (id) => {
-      const team = findById(id, this.state.teams)
-      const toggled = toggleStar(team);
-      const updatedTeams = updateTeam(this.state.teams, toggled);
+      // const team = findById(id, this.state.teams)
+      // const toggled = toggleStar(team);
+      // const updatedTeams = updateTeam(this.state.teams, toggled);
+      // replaced by pipe
+      const getUpdatedTeams = pipe(findById, toggleStar, partial(updateTeam,this.state.teams ))
+      const updatedTeams = getUpdatedTeams(id, this.state.teams)
       this.setState( {
         teams: updatedTeams
       })
@@ -65,7 +80,7 @@ export default class App extends Component {
       fbTeamList.push(this.props.teams[key]);
     })
 
-    console.log('snapshot', this.props);
+  //  console.log('snapshot', this.props);
     return (
       <div className="App">
         <Header />
@@ -73,7 +88,8 @@ export default class App extends Component {
 
           <ListMatches matches={this.state.matches} />
           <ListTeams teams={this.state.teams} 
-                    toggleStar={this.handleToggleStar} />
+                    toggleStar={this.handleToggleStar}
+                    handleRemove={this.handleRemoveTeam} />
           {this.state.errorMessage && <span className="error">{this.state.errorMessage}</span>}
           <FormTeam handleInputChange={this.handleInputChange} 
                     addition={this.state.addition}
@@ -96,7 +112,9 @@ export default class App extends Component {
         <p className="App-intro">
           {JSON.stringify(this.props.fred)}
         </p>
+        <Footer />
       </div>
+
     );
   }
 }
