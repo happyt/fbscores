@@ -15,6 +15,19 @@ export class Router extends Component {
         history.pushState(null, '', route)
     }
     
+    static childContextTypes = {
+        route: React.PropTypes.string,
+        linkHandler: React.PropTypes.func
+    }
+
+    getChildContext() {
+        return {
+            route: this.state.route,
+            linkHandler: this.handleLinkClick
+        }
+    }
+
+
     render () {
         return <div> {this.props.children}</div>
     }

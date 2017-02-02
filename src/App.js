@@ -3,7 +3,7 @@ import Header from './Header';
 import {ListMatches} from './components/matches';
 import {FormTeam, ListTeams} from './components/teams';
 import {Footer} from './Footer';
-import {addTeam, generateId, findById, toggleStar, updateTeam, removeTeam} from './lib/matchHelpers';
+import {addTeam, generateId, findById, toggleStar, updateTeam, removeTeam, filterTeams} from './lib/matchHelpers';
 import {pipe, partial} from './lib/utils';
 import './App.css';
 
@@ -22,6 +22,10 @@ export default class App extends Component {
         { id: 3, teamA: "Man City", teamB: "Chelsea", scoreA: 0, scoreB: 0, finished: false },
       ],
       addition: "abc"
+    }
+
+    static contextTypes = {
+      route : React.PropTypes.string
     }
 
     handleRemoveTeam = (id, evt) => {
@@ -75,6 +79,7 @@ export default class App extends Component {
 
   render() {
     const submitHandler = this.state.addition ? this.handleTeamSubmit : this.handleEmptySubmit;
+    const displayTeams = filterTeams(this.state.teams, this.context.route)
     const fbTeamList = [];
      Object.keys(this.props.teams).forEach( key => {
       fbTeamList.push(this.props.teams[key]);
@@ -87,7 +92,7 @@ export default class App extends Component {
         <div className="App-intro">Matches
 
           <ListMatches matches={this.state.matches} />
-          <ListTeams teams={this.state.teams} 
+          <ListTeams teams={displayTeams} 
                     toggleStar={this.handleToggleStar}
                     handleRemove={this.handleRemoveTeam} />
           {this.state.errorMessage && <span className="error">{this.state.errorMessage}</span>}

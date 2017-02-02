@@ -35,3 +35,14 @@ export const removeTeam = (list, id) => {
         ...list.slice(0, removeIndex),  ...list.slice(removeIndex+1)
     ]
 }
+
+export const filterTeams = (list, route) => {
+    switch(route) {
+        case '/starred':
+            return list.filter(team => team.star)
+        case '/clear':
+            return list.filter(team => !team.star)
+        default:
+            return list
+    }
+}

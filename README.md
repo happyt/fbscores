@@ -15,7 +15,7 @@ Need to make a few pages to show teams, matches and the history of a knockout dr
 - Use auth
 
 
-## Default infoo fromm create-react-app ##
+## Default info from create-react-app ##
 
 This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).
 

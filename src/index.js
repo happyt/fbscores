@@ -1,10 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { Router, Route, browserHistory } from 'react-router'
+// import { Router, Route, browserHistory } from 'react-router'
+import { Router } from './components/router'
 
-import Header from './Header';
 import App from './App';
-import Two from './Two';
+// import Two from './Two';
 import './index.css';
 import * as firebase from 'firebase';
 
@@ -39,13 +39,14 @@ const actions = {
 fb.on('value', snapshot => {
   const store = snapshot.val();
   ReactDOM.render(
-    <Router history={browserHistory}>
-      <Route path="/" component={Header}>
-        <Route path="/" component={() => (<App {...actions}{...store} />)} />
-        <Route path="/two" component={() => (<Two {...store} />)} />
-      </Route>
+    <Router>
+        <App {...actions}{...store} />
     </Router>,
     document.getElementById('root')
   );
 });
 
+    // <Router history={browserHistory}>
+    //     <Route path="/" component={() => (<App {...actions}{...store} />)} />
+    //     <Route path="/two" component={() => (<Two {...store} />)} />
+    // </Router>,
