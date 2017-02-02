@@ -5,17 +5,14 @@ import {FormTeam, ListTeams} from './components/teams';
 import {Footer} from './Footer';
 import {addTeam, generateId, findById, toggleStar, updateTeam, removeTeam, filterTeams} from './lib/matchHelpers';
 import {pipe, partial} from './lib/utils';
+import {loadTeams, createTeam, saveTeam} from './lib/teamService';
 import './App.css';
 
 
 export default class App extends Component {
 
       state = {
-      teams : [
-        { id: 1, name: "Leeds", star: false },
-        { id: 2, name: "Liverpool", star: true },
-        { id: 3, name: "Man City", star: false },
-      ],
+      teams : [],
       matches: [
         { id: 1, teamA: "Leeds", teamB: "Man Utd", scoreA: 0, scoreB: 0, finished: false },
         { id: 2, teamA: "Liverpool", teamB: "Arsenal", scoreA: 0, scoreB: 0, finished: true },
@@ -26,6 +23,13 @@ export default class App extends Component {
 
     static contextTypes = {
       route : React.PropTypes.string
+    }
+
+    componentDidMount() {
+      loadTeams()
+        .then(teams => this.setState( {
+          teams
+        }))
     }
 
     handleRemoveTeam = (id, evt) => {
@@ -41,11 +45,14 @@ export default class App extends Component {
       // const toggled = toggleStar(team);
       // const updatedTeams = updateTeam(this.state.teams, toggled);
       // replaced by pipe
-      const getUpdatedTeams = pipe(findById, toggleStar, partial(updateTeam,this.state.teams ))
-      const updatedTeams = getUpdatedTeams(id, this.state.teams)
-      this.setState( {
-        teams: updatedTeams
-      })
+ //  debugger;
+      const getToggledTeam = pipe(findById, toggleStar)
+      const updated = getToggledTeam(id, this.state.teams)
+      const getUpdatedTeams = partial(updateTeam, this.state.teams)
+      const updatedTeams = getUpdatedTeams(updated)
+      this.setState( { teams: updatedTeams })
+      saveTeam(updated)
+        .then(() => this.showTempMessage("team updated"))
     }
 
   handleEmptySubmit = (evt) => {
@@ -63,19 +70,33 @@ export default class App extends Component {
       star:false,
       id: newId
     }
+      
     const updatedTeams = addTeam(this.state.teams, newTeam);
     this.setState({
       teams: updatedTeams,
       addition: "",
       errorMessage: ""
     });
+
+    createTeam(newTeam)
+      .then(() => this.showTempMessage( "team added"))
   }
+
+  showTempMessage = (msg) => {
+    this.setState({
+      message:msg
+    })
+    setTimeout(() => this.setState({ message: ""}), 2500)
+  }
+  
 
   handleInputChange = (evt) => {
     this.setState({
       addition: evt.target.value
     })
   }
+
+
 
   render() {
     const submitHandler = this.state.addition ? this.handleTeamSubmit : this.handleEmptySubmit;
@@ -96,6 +117,7 @@ export default class App extends Component {
                     toggleStar={this.handleToggleStar}
                     handleRemove={this.handleRemoveTeam} />
           {this.state.errorMessage && <span className="error">{this.state.errorMessage}</span>}
+          {this.state.message && <span className="success">{this.state.message}</span>}
           <FormTeam handleInputChange={this.handleInputChange} 
                     addition={this.state.addition}
                     handleSubmit={submitHandler} />

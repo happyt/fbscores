@@ -1,0 +1,59 @@
+{
+  "teams": [
+    {
+      "id": 1,
+      "name": "Leeds",
+      "star": false
+    },
+    {
+      "id": 2,
+      "name": "Liverpool",
+      "star": true
+    },
+    {
+      "id": 3,
+      "name": "Man City",
+      "star": true
+    },
+    {
+      "id": 4,
+      "name": "Arsenal",
+      "star": true
+    },
+    {
+      "id": 5,
+      "name": "Man Utd",
+      "star": false
+    },
+    {
+      "id": 6,
+      "name": "Southampton",
+      "star": false
+    },
+    {
+      "name": "Burnley",
+      "star": false,
+      "id": 8225
+    },
+    {
+      "name": "Chelsea",
+      "star": false,
+      "id": 762
+    },
+    {
+      "name": "abc",
+      "star": true,
+      "id": 7802
+    },
+    {
+      "name": "abc",
+      "star": true,
+      "id": 166
+    },
+    {
+      "name": "Fulham",
+      "star": true,
+      "id": 2541
+    }
+  ]
+}
