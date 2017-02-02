@@ -26,3 +26,13 @@ export const saveTeam = (team) => {
         body: JSON.stringify(team)
     }).then(res => res.json())
 }
+
+export const deleteTeam = (id) => {
+    return fetch(`${baseUrl}/${id}`, {
+        method: 'DELETE',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        },
+    })
+}

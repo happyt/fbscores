@@ -5,7 +5,7 @@ import {FormTeam, ListTeams} from './components/teams';
 import {Footer} from './Footer';
 import {addTeam, generateId, findById, toggleStar, updateTeam, removeTeam, filterTeams} from './lib/matchHelpers';
 import {pipe, partial} from './lib/utils';
-import {loadTeams, createTeam, saveTeam} from './lib/teamService';
+import {loadTeams, createTeam, saveTeam, deleteTeam } from './lib/teamService';
 import './App.css';
 
 
@@ -35,9 +35,9 @@ export default class App extends Component {
     handleRemoveTeam = (id, evt) => {
       evt.preventDefault();
       const updatedTeams = removeTeam(this.state.teams, id)
-      this.setState( {
-        teams: updatedTeams
-      })
+      this.setState( { teams: updatedTeams })
+      deleteTeam(id)
+        .then(() => this.showTempMessage("team deleted"))
     }
 
     handleToggleStar = (id) => {
@@ -45,7 +45,6 @@ export default class App extends Component {
       // const toggled = toggleStar(team);
       // const updatedTeams = updateTeam(this.state.teams, toggled);
       // replaced by pipe
- //  debugger;
       const getToggledTeam = pipe(findById, toggleStar)
       const updated = getToggledTeam(id, this.state.teams)
       const getUpdatedTeams = partial(updateTeam, this.state.teams)
