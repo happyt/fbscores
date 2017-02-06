@@ -6,8 +6,6 @@ Need to make a few pages to show teams, matches and the history of a knockout dr
 
 ### Next steps ###
 
-- Separate the routes
-- Common header
 - List of locations
 - Edit location 
 - Routes to list locations, edit locations, set up matches, score match 
@@ -15,7 +13,7 @@ Need to make a few pages to show teams, matches and the history of a knockout dr
 - Use auth
 
 
-## Default info from create-react-app ##
+## Default info fromm create-react-app ##
 
 This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).
 
